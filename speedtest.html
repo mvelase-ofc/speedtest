@@ -12,8 +12,7 @@
   --border:#1a2235;
   --green:#22c55e;--green2:#16a34a;
   --blue:#3b82f6;--blue2:#2563eb;
-  --red:#ef4444;
-  --gold:#f59e0b;
+  --red:#ef4444;--gold:#f59e0b;
   --white:#eef2f7;--muted:#4a5568;--muted2:#2d3748;
   --mono:'DM Mono',monospace;--head:'Syne',sans-serif;--body:'DM Sans',sans-serif;
 }
@@ -43,13 +42,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 .hero-h1 .b{color:var(--blue)}.hero-h1 .g{color:var(--green)}
 .hero-desc{font-size:.87rem;color:var(--muted);line-height:1.72;font-weight:300;margin-bottom:0;}
 
-#offline-banner{
-  display:none;margin:14px 22px 0;
-  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);
-  border-radius:8px;padding:10px 16px;
-  font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;
-  color:var(--red);text-align:center;
-}
+#offline-banner{display:none;margin:14px 22px 0;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:10px 16px;font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:var(--red);text-align:center;}
 
 .speedo-wrap{padding:28px 22px 16px;display:flex;flex-direction:column;align-items:center;gap:0;}
 .speed-display{text-align:center;margin-bottom:20px;}
@@ -316,98 +309,92 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 <div id="toast"><div class="th" id="t-head">INFO</div><span id="t-body"></span></div>
 
 <script>
-/* ══ BAR VISUALIZER ══ */
-const TOTAL_BARS = 30;
-const barsRow = document.getElementById('barsRow');
-
-for(let i = 0; i < TOTAL_BARS; i++){
-  const pct = i / (TOTAL_BARS - 1);
-  const h   = Math.round(8 + Math.sin(pct * Math.PI) * 48);
-  const box = document.createElement('div');
-  box.className = 'bar-box';
-  box.style.height = h + 'px';
+/* ══ BARS ══ */
+const TOTAL_BARS=30;
+const barsRow=document.getElementById('barsRow');
+for(let i=0;i<TOTAL_BARS;i++){
+  const pct=i/(TOTAL_BARS-1);
+  const h=Math.round(8+Math.sin(pct*Math.PI)*48);
+  const box=document.createElement('div');
+  box.className='bar-box';
+  box.style.height=h+'px';
   barsRow.appendChild(box);
 }
-
-function getZone(posPct){
-  if(posPct < 10)      return 'zone-slow';
-  else if(posPct < 30) return 'zone-good';
-  else if(posPct < 60) return 'zone-fast';
-  else                 return 'zone-blazing';
+function getZone(p){
+  if(p<10)return 'zone-slow';
+  if(p<30)return 'zone-good';
+  if(p<60)return 'zone-fast';
+  return 'zone-blazing';
 }
-function animateBars(value, maxVal){
-  const litCount = Math.round(Math.min(Math.max(value,0)/maxVal,1)*TOTAL_BARS);
-  barsRow.querySelectorAll('.bar-box').forEach((box,i)=>{
-    box.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
-    if(i < litCount){
-      box.classList.add(getZone((i/(TOTAL_BARS-1))*100));
-      if(i === litCount-1) box.classList.add('pulsing');
-    }
+function animateBars(value,maxVal){
+  const lit=Math.round(Math.min(Math.max(value,0)/maxVal,1)*TOTAL_BARS);
+  barsRow.querySelectorAll('.bar-box').forEach((b,i)=>{
+    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
+    if(i<lit){b.classList.add(getZone((i/(TOTAL_BARS-1))*100));if(i===lit-1)b.classList.add('pulsing');}
   });
 }
-function freezeBars(value, maxVal){
-  const litCount = Math.round(Math.min(value/maxVal,1)*TOTAL_BARS);
-  barsRow.querySelectorAll('.bar-box').forEach((box,i)=>{
-    box.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
-    if(i < litCount) box.classList.add(getZone((i/(TOTAL_BARS-1))*100));
+function freezeBars(value,maxVal){
+  const lit=Math.round(Math.min(value/maxVal,1)*TOTAL_BARS);
+  barsRow.querySelectorAll('.bar-box').forEach((b,i)=>{
+    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
+    if(i<lit)b.classList.add(getZone((i/(TOTAL_BARS-1))*100));
   });
 }
 function resetBars(){
   barsRow.querySelectorAll('.bar-box').forEach(b=>
-    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing')
-  );
+    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing'));
 }
 
-/* ══ SPEED DISPLAY ══ */
-function setSpeedDisplay(value, unit, label, colorVal){
-  document.getElementById('speed-num').textContent = typeof value==='number' ? value.toFixed(1) : value;
-  document.getElementById('speed-unit-label').textContent = unit||'Mbps';
-  document.getElementById('speed-label').textContent = label||'';
-  const v = colorVal!==undefined ? colorVal : (typeof value==='number' ? value : 0);
-  const el = document.getElementById('speed-num');
-  if(v>=60) el.style.color='#ef4444';
-  else if(v>=30) el.style.color='#f59e0b';
-  else if(v>=10) el.style.color='#22c55e';
+/* ══ DISPLAY ══ */
+function setSpeedDisplay(value,unit,label,cv){
+  document.getElementById('speed-num').textContent=typeof value==='number'?value.toFixed(1):value;
+  document.getElementById('speed-unit-label').textContent=unit||'Mbps';
+  document.getElementById('speed-label').textContent=label||'';
+  const v=cv!==undefined?cv:(typeof value==='number'?value:0);
+  const el=document.getElementById('speed-num');
+  if(v>=60)el.style.color='#ef4444';
+  else if(v>=30)el.style.color='#f59e0b';
+  else if(v>=10)el.style.color='#22c55e';
   else el.style.color='#3b82f6';
 }
 
 /* ══ STATE ══ */
-let testRunning=false, lastResult=null;
+let testRunning=false,lastResult=null;
 let history=JSON.parse(localStorage.getItem('nkt_speed_history')||'[]');
 
 /* ══ HELPERS ══ */
-function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
-function animateTo(from,to,dur,onUpdate){
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function animateTo(from,to,dur,fn){
   return new Promise(resolve=>{
     const start=performance.now();
     function step(now){
       const pct=Math.min((now-start)/dur,1);
-      onUpdate(from+(to-from)*(1-Math.pow(1-pct,3)));
-      if(pct<1) requestAnimationFrame(step); else resolve();
+      fn(from+(to-from)*(1-Math.pow(1-pct,3)));
+      if(pct<1)requestAnimationFrame(step);else resolve();
     }
     requestAnimationFrame(step);
   });
 }
-function setProgress(p){ document.getElementById('progressFill').style.width=p+'%'; }
-function setPhase(t){ document.getElementById('phaseLabel').textContent=t; }
-function setBarPhase(t){ document.getElementById('bar-phase').textContent=t; }
+function setProgress(p){document.getElementById('progressFill').style.width=p+'%';}
+function setPhase(t){document.getElementById('phaseLabel').textContent=t;}
+function setBarPhase(t){document.getElementById('bar-phase').textContent=t;}
 
 function rateDownload(m){
   if(m>=25)return{label:'Excellent',color:'#22c55e',pct:100};
   if(m>=10)return{label:'Good',color:'#22c55e',pct:75};
-  if(m>=5) return{label:'Fair',color:'#f59e0b',pct:50};
-  if(m>=1) return{label:'Poor',color:'#ef4444',pct:25};
+  if(m>=5)return{label:'Fair',color:'#f59e0b',pct:50};
+  if(m>=1)return{label:'Poor',color:'#ef4444',pct:25};
   return{label:'Very Poor',color:'#ef4444',pct:10};
 }
 function ratePing(ms){
-  if(ms<=20) return{label:'Excellent',color:'#22c55e',pct:100};
-  if(ms<=50) return{label:'Good',color:'#22c55e',pct:75};
+  if(ms<=20)return{label:'Excellent',color:'#22c55e',pct:100};
+  if(ms<=50)return{label:'Good',color:'#22c55e',pct:75};
   if(ms<=100)return{label:'Fair',color:'#f59e0b',pct:50};
   if(ms<=200)return{label:'Poor',color:'#ef4444',pct:25};
   return{label:'Very Poor',color:'#ef4444',pct:10};
 }
 function rateJitter(ms){
-  if(ms<=5) return{label:'Excellent',color:'#22c55e',pct:100};
+  if(ms<=5)return{label:'Excellent',color:'#22c55e',pct:100};
   if(ms<=15)return{label:'Good',color:'#22c55e',pct:75};
   if(ms<=30)return{label:'Fair',color:'#f59e0b',pct:50};
   return{label:'Poor',color:'#ef4444',pct:25};
@@ -420,16 +407,16 @@ function setRatingBadge(id,r){
   el.style.color=r.color;
 }
 
-/* ══ CONNECTIVITY CHECK ══ */
+/* ══ ONLINE CHECK ══ */
 async function checkOnline(){
-  if(!navigator.onLine) return false;
+  if(!navigator.onLine)return false;
   try{
     const ctrl=new AbortController();
     setTimeout(()=>ctrl.abort(),4000);
     await fetch('https://www.cloudflare.com/cdn-cgi/trace?_='+Date.now(),
       {cache:'no-store',mode:'no-cors',signal:ctrl.signal});
     return true;
-  }catch(e){ return false; }
+  }catch(e){return false;}
 }
 
 /* ══ PING ══ */
@@ -447,7 +434,7 @@ async function measurePing(){
     clearTimeout(tid);
     await sleep(60);
   }
-  if(!times.length) return{ping:999,jitter:999};
+  if(!times.length)return{ping:999,jitter:999};
   times.sort((a,b)=>a-b);
   const trimmed=times.length>=4?times.slice(1,-1):times;
   const avg=trimmed.reduce((a,b)=>a+b,0)/trimmed.length;
@@ -455,14 +442,14 @@ async function measurePing(){
   return{ping:Math.max(1,Math.round(avg)),jitter:Math.max(0,Math.round(jitter))};
 }
 
-/* ══ DOWNLOAD — Cloudflare speed endpoint ══ */
+/* ══ DOWNLOAD ══ */
 async function measureDownload(onProgress){
   const chunks=[
     {url:'https://speed.cloudflare.com/__down?bytes=1000000',bytes:1000000},
     {url:'https://speed.cloudflare.com/__down?bytes=5000000',bytes:5000000},
     {url:'https://speed.cloudflare.com/__down?bytes=10000000',bytes:10000000},
   ];
-  let totalBits=0, totalSec=0;
+  let totalBits=0,totalSec=0;
   for(const chunk of chunks){
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),20000);
@@ -473,106 +460,82 @@ async function measureDownload(onProgress){
       let received=0;
       while(true){
         const{done,value}=await reader.read();
-        if(done) break;
+        if(done)break;
         received+=value.length;
         const elapsed=(performance.now()-t0)/1000;
-        if(elapsed>0.1 && onProgress) onProgress((received*8)/(elapsed*1e6));
+        if(elapsed>0.1&&onProgress)onProgress((received*8)/(elapsed*1e6));
       }
       const elapsed=(performance.now()-t0)/1000;
-      if(elapsed>0){ totalBits+=chunk.bytes*8; totalSec+=elapsed; }
+      if(elapsed>0){totalBits+=chunk.bytes*8;totalSec+=elapsed;}
     }catch(e){}
     clearTimeout(tid);
-    if(totalSec>0 && onProgress) onProgress(totalBits/(totalSec*1e6));
+    if(totalSec>0&&onProgress)onProgress(totalBits/(totalSec*1e6));
   }
-  return totalSec===0 ? 0 : Math.max(0.01, totalBits/(totalSec*1e6));
+  return totalSec===0?0:Math.max(0.01,totalBits/(totalSec*1e6));
 }
 
-/* ══════════════════════════════════════════════
-   UPLOAD FIX — use Cloudflare speed test upload
-   endpoint which explicitly allows CORS from browsers.
-   httpbin.org and postman-echo block POST CORS.
-══════════════════════════════════════════════ */
+/* ══ UPLOAD — XHR progress timing (no CORS needed) ══ */
 async function measureUpload(onProgress){
-  /* Cloudflare's __up endpoint accepts browser POST with CORS headers */
-  const CF_UP = 'https://speed.cloudflare.com/__up';
+  const sizes=[500000,1000000,2000000];
+  let totalBits=0,totalSec=0;
 
-  const chunkSizes = [500000, 1000000, 2000000]; // 0.5MB, 1MB, 2MB
-  let totalBits=0, totalSec=0;
-
-  for(const sz of chunkSizes){
-    /* generate random bytes so compression can't inflate the result */
-    const data = new Uint8Array(sz);
+  for(const sz of sizes){
+    const data=new Uint8Array(sz);
     crypto.getRandomValues(data);
 
-    const ctrl=new AbortController();
-    const tid=setTimeout(()=>ctrl.abort(), 20000);
-
-    try{
+    const speed=await new Promise(resolve=>{
+      const xhr=new XMLHttpRequest();
       const t0=performance.now();
-      const resp=await fetch(CF_UP+'?_='+Date.now(), {
-        method: 'POST',
-        body: data,
-        headers: { 'Content-Type': 'application/octet-stream' },
-        signal: ctrl.signal,
-        cache: 'no-store',
-        mode: 'cors'  /* Cloudflare __up supports CORS */
-      });
-      /* consume response body so the request fully completes */
-      await resp.text();
-      const elapsed=(performance.now()-t0)/1000;
-      if(elapsed > 0){
-        totalBits += sz * 8;
-        totalSec  += elapsed;
-        if(onProgress) onProgress(totalBits/(totalSec*1e6));
-      }
-    }catch(e){
-      /* if Cloudflare __up fails, try fallback: measure XHR upload timing */
-      try{
-        const t0=performance.now();
-        await new Promise((res,rej)=>{
-          const xhr=new XMLHttpRequest();
-          /* Use a different CORS-friendly endpoint */
-          xhr.open('POST','https://httpbin.org/post?_='+Date.now());
-          xhr.setRequestHeader('Content-Type','application/octet-stream');
-          xhr.timeout=15000;
-          xhr.upload.onprogress=e=>{
-            if(e.loaded>0){
-              const elapsed=(performance.now()-t0)/1000;
-              if(elapsed>0.1 && onProgress) onProgress((e.loaded*8)/(elapsed*1e6));
-            }
-          };
-          xhr.onload=()=>res(xhr.responseText);
-          xhr.onerror=()=>rej(new Error('XHR failed'));
-          xhr.ontimeout=()=>rej(new Error('XHR timeout'));
-          xhr.send(data);
-        });
+      let lastSpeed=0;
+
+      /* onprogress fires locally as bytes leave the device — no CORS needed */
+      xhr.upload.onprogress=e=>{
+        if(!e.loaded)return;
         const elapsed=(performance.now()-t0)/1000;
-        if(elapsed>0){
-          totalBits+=sz*8; totalSec+=elapsed;
-          if(onProgress) onProgress(totalBits/(totalSec*1e6));
-        }
-      }catch(e2){/* both failed — continue to next chunk */}
+        if(elapsed<0.1)return;
+        lastSpeed=(e.loaded*8)/(elapsed*1e6);
+        if(onProgress)onProgress(lastSpeed);
+      };
+
+      xhr.upload.onload=()=>{
+        const elapsed=(performance.now()-t0)/1000;
+        resolve(elapsed>0?(sz*8)/(elapsed*1e6):lastSpeed);
+      };
+
+      xhr.upload.onerror=()=>resolve(lastSpeed);
+      xhr.ontimeout=()=>resolve(lastSpeed);
+      xhr.onerror=()=>resolve(lastSpeed);
+
+      /* Cloudflare trace endpoint — accepts any method, no preflight for simple requests */
+      xhr.open('POST','https://www.cloudflare.com/cdn-cgi/trace?ul=1&_='+Date.now());
+      xhr.timeout=20000;
+      /* No Content-Type header = simple request = no CORS preflight */
+      xhr.send(new Blob([data]));
+    });
+
+    if(speed>0){
+      totalBits+=sz*8;
+      totalSec+=(sz*8)/(speed*1e6);
     }
-    clearTimeout(tid);
+    await sleep(200);
   }
 
   if(totalSec===0){
-    /* Last resort: estimate upload from download ratio typical for connection type */
+    /* Fallback: estimate from Network Information API */
     const conn=navigator.connection;
-    if(conn && conn.downlink){
-      const est=conn.downlink*0.4;
-      if(onProgress) onProgress(est);
+    if(conn&&conn.downlink){
+      const est=conn.downlink*0.35;
+      if(onProgress)onProgress(est);
       return est;
     }
     return 0;
   }
-  return Math.max(0.01, totalBits/(totalSec*1e6));
+  return Math.max(0.01,totalBits/(totalSec*1e6));
 }
 
 /* ══ MAIN TEST ══ */
 async function startTest(){
-  if(testRunning) return;
-
+  if(testRunning)return;
   setPhase('Checking connection...');
   const online=await checkOnline();
   if(!online){
@@ -582,8 +545,8 @@ async function startTest(){
     return;
   }
   document.getElementById('offline-banner').style.display='none';
-
   testRunning=true;
+
   const btn=document.getElementById('testBtn');
   btn.classList.add('running');
   document.getElementById('btn-icon').className='fas fa-spinner spin-icon';
@@ -598,18 +561,18 @@ async function startTest(){
   setBarPhase('PING');
   setSpeedDisplay('—','ms','MEASURING PING...',0);
 
-  let lv=0, ld=1;
+  let lv=0,ld=1;
   const pingAnim=setInterval(()=>{
     lv+=(Math.random()*8)*ld;
-    if(lv>60)ld=-1; if(lv<2)ld=1;
+    if(lv>60)ld=-1;if(lv<2)ld=1;
     lv=Math.max(1,lv);
     animateBars(lv,200);
     document.getElementById('speed-num').textContent=Math.round(lv);
   },120);
 
   let pingData;
-  try{ pingData=await measurePing(); }
-  catch(e){ pingData={ping:999,jitter:99}; }
+  try{pingData=await measurePing();}
+  catch(e){pingData={ping:999,jitter:99};}
   clearInterval(pingAnim);
 
   await animateTo(lv,pingData.ping,500,v=>{
@@ -651,7 +614,7 @@ async function startTest(){
   setProgress(66);
   await sleep(500);
 
-  /* PHASE 3: UPLOAD — now using Cloudflare __up */
+  /* PHASE 3: UPLOAD */
   setPhase('Phase 3 of 3 — Upload Speed');
   setBarPhase('UPLOAD');
   setSpeedDisplay('0.0','Mbps','MEASURING UPLOAD...',0);
@@ -739,10 +702,10 @@ function shareResult(){
   function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
   resize();window.addEventListener('resize',resize);
   const nodes=[];
-  for(let i=0;i<45;i++) nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1,color:Math.random()>.5?'rgba(59,130,246,':'rgba(34,197,94,'});
+  for(let i=0;i<45;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1,color:Math.random()>.5?'rgba(59,130,246,':'rgba(34,197,94,'});
   function draw(){
     ctx.clearRect(0,0,c.width,c.height);
-    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
       const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
       if(d<110){ctx.beginPath();ctx.strokeStyle=`rgba(59,130,246,${(1-d/110)*.12})`;ctx.lineWidth=.5;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
     }
@@ -782,8 +745,8 @@ function detectConnectionType(){
   const conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
   if(conn){
     let type='';
-    if(conn.type==='wifi') type='WiFi';
-    else if(conn.type==='ethernet') type='Ethernet';
+    if(conn.type==='wifi')type='WiFi';
+    else if(conn.type==='ethernet')type='Ethernet';
     else{
       const eff=conn.effectiveType||'',dl=conn.downlink||0;
       if(dl>=50)type='5G';
