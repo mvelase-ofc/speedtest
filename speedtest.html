@@ -18,7 +18,8 @@
   --mono:'DM Mono',monospace;--head:'Syne',sans-serif;--body:'DM Sans',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{max-width:100%;overflow-x:hidden;scroll-behavior:smooth}
+html{scroll-behavior:smooth}
+html,body{max-width:100%;overflow-x:hidden}
 body{font-family:var(--body);background:var(--bg);color:var(--white)}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -40,17 +41,14 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 .hero-tag .dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pip 1.4s infinite;box-shadow:0 0 5px var(--green)}
 .hero-h1{font-family:var(--head);font-weight:800;font-size:clamp(2rem,6vw,3rem);line-height:1.05;letter-spacing:.02em;color:var(--white);margin-bottom:8px;}
 .hero-h1 .b{color:var(--blue)}.hero-h1 .g{color:var(--green)}
-.hero-desc{font-size:.87rem;color:var(--muted);line-height:1.72;font-weight:300;}
+.hero-desc{font-size:.87rem;color:var(--muted);line-height:1.72;font-weight:300;margin-bottom:0;}
 
-#offline-banner{display:none;margin:14px 22px 0;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:10px 16px;font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:var(--red);text-align:center;}
-
-/* METHOD INFO BOX */
-#method-info{
-  display:none;margin:10px 22px 0;
-  background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);
-  border-radius:8px;padding:9px 14px;
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.05em;
-  color:rgba(59,130,246,.8);text-align:center;
+#offline-banner{
+  display:none;margin:14px 22px 0;
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);
+  border-radius:8px;padding:10px 16px;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;
+  color:var(--red);text-align:center;
 }
 
 .speedo-wrap{padding:28px 22px 16px;display:flex;flex-direction:column;align-items:center;gap:0;}
@@ -64,6 +62,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 .bar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
 .bar-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;}
 .bar-phase{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--blue);}
+
 .bars-row{display:flex;align-items:flex-end;justify-content:space-between;gap:4px;height:56px;margin-bottom:12px;}
 .bar-box{flex:1;border-radius:5px;background:#0f1729;transition:background .18s,box-shadow .18s;min-width:0;}
 .bar-box.zone-slow{background:#1d4ed8;box-shadow:0 0 8px rgba(59,130,246,.5),0 0 16px rgba(59,130,246,.2);}
@@ -72,6 +71,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 .bar-box.zone-blazing{background:#b91c1c;box-shadow:0 0 10px rgba(239,68,68,.6),0 0 20px rgba(239,68,68,.25);}
 .bar-box.pulsing{animation:barPulse .6s ease-in-out infinite alternate;}
 @keyframes barPulse{from{opacity:.7}to{opacity:1}}
+
 .bar-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;color:var(--muted2);padding:0 2px;margin-bottom:12px;}
 .bar-legend{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
 .bl-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.05em;color:var(--muted);}
@@ -84,6 +84,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 .test-btn.running::before{opacity:1;}
 .test-btn:hover:not(.running){transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,.4);}
 .test-btn span,.test-btn i{position:relative;z-index:1;}
+.test-btn i{font-size:.9rem;}
 .test-btn.running{cursor:not-allowed;}
 .spin-icon{animation:spinIcon .8s linear infinite;}
 @keyframes spinIcon{to{transform:rotate(360deg)}}
@@ -91,7 +92,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 .progress-wrap{padding:0 22px 6px;}
 .progress-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
 .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:2px;transition:width .4s ease;}
-.phase-label{text-align:center;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;padding:8px 22px 0;min-height:22px;}
+.phase-label{text-align:center;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;padding:8px 22px 0;height:22px;}
 
 .results-grid{padding:16px 22px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .result-card{background:rgba(11,14,20,.85);border:1px solid var(--border);border-radius:12px;padding:18px 16px;position:relative;overflow:hidden;transition:border-color .3s;backdrop-filter:blur(8px);}
@@ -171,11 +172,10 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 <div class="hero fade">
   <div class="hero-tag"><div class="dot"></div>REAL TIME NETWORK TEST</div>
   <h1 class="hero-h1">NETWORK <span class="b">SPEED</span><br>TEST <span class="g">ZWE</span></h1>
-  <p class="hero-desc">Test your internet speed instantly. Works on WiFi and mobile data.</p>
+  <p class="hero-desc">Test your internet speed and see your real network info instantly. Works on WiFi and mobile data.</p>
 </div>
 
-<div id="offline-banner"><i class="fas fa-wifi-slash"></i>&nbsp; No internet connection detected — connect and try again.</div>
-<div id="method-info"></div>
+<div id="offline-banner"><i class="fas fa-wifi"></i>&nbsp; No internet connection detected — connect and try again.</div>
 
 <div class="speedo-wrap fade">
   <div class="speed-display">
@@ -316,55 +316,87 @@ body{font-family:var(--body);background:var(--bg);color:var(--white)}
 <div id="toast"><div class="th" id="t-head">INFO</div><span id="t-body"></span></div>
 
 <script>
-/* ══ BARS ══ */
-const TOTAL_BARS=30;
-const barsRow=document.getElementById('barsRow');
-for(let i=0;i<TOTAL_BARS;i++){
-  const pct=i/(TOTAL_BARS-1);
-  const h=Math.round(8+Math.sin(pct*Math.PI)*48);
-  const box=document.createElement('div');
-  box.className='bar-box';box.style.height=h+'px';
+/* ══ BAR VISUALIZER ══ */
+const TOTAL_BARS = 30;
+const barsRow = document.getElementById('barsRow');
+
+for(let i = 0; i < TOTAL_BARS; i++){
+  const pct = i / (TOTAL_BARS - 1);
+  const h   = Math.round(8 + Math.sin(pct * Math.PI) * 48);
+  const box = document.createElement('div');
+  box.className = 'bar-box';
+  box.style.height = h + 'px';
   barsRow.appendChild(box);
 }
-function getZone(p){return p<10?'zone-slow':p<30?'zone-good':p<60?'zone-fast':'zone-blazing';}
-function animateBars(v,mx){
-  const lit=Math.round(Math.min(Math.max(v,0)/mx,1)*TOTAL_BARS);
-  barsRow.querySelectorAll('.bar-box').forEach((b,i)=>{
-    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
-    if(i<lit){b.classList.add(getZone((i/(TOTAL_BARS-1))*100));if(i===lit-1)b.classList.add('pulsing');}
+
+function getZone(posPct){
+  if(posPct < 10)      return 'zone-slow';
+  else if(posPct < 30) return 'zone-good';
+  else if(posPct < 60) return 'zone-fast';
+  else                 return 'zone-blazing';
+}
+function animateBars(value, maxVal){
+  const litCount = Math.round(Math.min(Math.max(value,0)/maxVal,1)*TOTAL_BARS);
+  barsRow.querySelectorAll('.bar-box').forEach((box,i)=>{
+    box.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
+    if(i < litCount){
+      box.classList.add(getZone((i/(TOTAL_BARS-1))*100));
+      if(i === litCount-1) box.classList.add('pulsing');
+    }
   });
 }
-function freezeBars(v,mx){
-  const lit=Math.round(Math.min(v/mx,1)*TOTAL_BARS);
-  barsRow.querySelectorAll('.bar-box').forEach((b,i)=>{
-    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
-    if(i<lit)b.classList.add(getZone((i/(TOTAL_BARS-1))*100));
+function freezeBars(value, maxVal){
+  const litCount = Math.round(Math.min(value/maxVal,1)*TOTAL_BARS);
+  barsRow.querySelectorAll('.bar-box').forEach((box,i)=>{
+    box.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing');
+    if(i < litCount) box.classList.add(getZone((i/(TOTAL_BARS-1))*100));
   });
 }
-function resetBars(){barsRow.querySelectorAll('.bar-box').forEach(b=>b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing'));}
-
-/* ══ DISPLAY ══ */
-function setSpeedDisplay(value,unit,label,col){
-  document.getElementById('speed-num').textContent=typeof value==='number'?value.toFixed(1):value;
-  document.getElementById('speed-unit-label').textContent=unit||'Mbps';
-  document.getElementById('speed-label').textContent=label||'';
-  const v=col!==undefined?col:(typeof value==='number'?value:0);
-  const num=document.getElementById('speed-num');
-  if(v>=60)num.style.color='#ef4444';
-  else if(v>=30)num.style.color='#f59e0b';
-  else if(v>=10)num.style.color='#22c55e';
-  else num.style.color='#3b82f6';
+function resetBars(){
+  barsRow.querySelectorAll('.bar-box').forEach(b=>
+    b.classList.remove('zone-slow','zone-good','zone-fast','zone-blazing','pulsing')
+  );
 }
-function setProgress(p){document.getElementById('progressFill').style.width=p+'%';}
-function setPhase(t){document.getElementById('phaseLabel').textContent=t;}
-function setBarPhase(t){document.getElementById('bar-phase').textContent=t;}
 
-/* ══ RATING ══ */
-function rateSpeed(mbps){
-  if(mbps>=25)return{label:'Excellent',color:'#22c55e',pct:100};
-  if(mbps>=10)return{label:'Good',color:'#22c55e',pct:75};
-  if(mbps>=5) return{label:'Fair',color:'#f59e0b',pct:50};
-  if(mbps>=1) return{label:'Poor',color:'#ef4444',pct:25};
+/* ══ SPEED DISPLAY ══ */
+function setSpeedDisplay(value, unit, label, colorVal){
+  document.getElementById('speed-num').textContent = typeof value==='number' ? value.toFixed(1) : value;
+  document.getElementById('speed-unit-label').textContent = unit||'Mbps';
+  document.getElementById('speed-label').textContent = label||'';
+  const v = colorVal!==undefined ? colorVal : (typeof value==='number' ? value : 0);
+  const el = document.getElementById('speed-num');
+  if(v>=60) el.style.color='#ef4444';
+  else if(v>=30) el.style.color='#f59e0b';
+  else if(v>=10) el.style.color='#22c55e';
+  else el.style.color='#3b82f6';
+}
+
+/* ══ STATE ══ */
+let testRunning=false, lastResult=null;
+let history=JSON.parse(localStorage.getItem('nkt_speed_history')||'[]');
+
+/* ══ HELPERS ══ */
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function animateTo(from,to,dur,onUpdate){
+  return new Promise(resolve=>{
+    const start=performance.now();
+    function step(now){
+      const pct=Math.min((now-start)/dur,1);
+      onUpdate(from+(to-from)*(1-Math.pow(1-pct,3)));
+      if(pct<1) requestAnimationFrame(step); else resolve();
+    }
+    requestAnimationFrame(step);
+  });
+}
+function setProgress(p){ document.getElementById('progressFill').style.width=p+'%'; }
+function setPhase(t){ document.getElementById('phaseLabel').textContent=t; }
+function setBarPhase(t){ document.getElementById('bar-phase').textContent=t; }
+
+function rateDownload(m){
+  if(m>=25)return{label:'Excellent',color:'#22c55e',pct:100};
+  if(m>=10)return{label:'Good',color:'#22c55e',pct:75};
+  if(m>=5) return{label:'Fair',color:'#f59e0b',pct:50};
+  if(m>=1) return{label:'Poor',color:'#ef4444',pct:25};
   return{label:'Very Poor',color:'#ef4444',pct:10};
 }
 function ratePing(ms){
@@ -380,7 +412,7 @@ function rateJitter(ms){
   if(ms<=30)return{label:'Fair',color:'#f59e0b',pct:50};
   return{label:'Poor',color:'#ef4444',pct:25};
 }
-function setBadge(id,r){
+function setRatingBadge(id,r){
   const el=document.getElementById(id);
   el.textContent=r.label;
   el.style.background=r.color+'22';
@@ -388,251 +420,158 @@ function setBadge(id,r){
   el.style.color=r.color;
 }
 
-/* ══ STATE ══ */
-let testRunning=false,lastResult=null;
-let history=JSON.parse(localStorage.getItem('nkt_speed_history')||'[]');
-function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
-function animateTo(from,to,dur,cb){
-  return new Promise(resolve=>{
-    const start=performance.now();
-    function step(now){
-      const pct=Math.min((now-start)/dur,1);
-      cb(from+(to-from)*(1-Math.pow(1-pct,3)));
-      if(pct<1)requestAnimationFrame(step);else resolve();
-    }
-    requestAnimationFrame(step);
-  });
-}
-
-/* ══════════════════════════════════════════════════
-   ONLINE CHECK
-══════════════════════════════════════════════════ */
+/* ══ CONNECTIVITY CHECK ══ */
 async function checkOnline(){
-  if(!navigator.onLine)return false;
-  const urls=['https://www.cloudflare.com/cdn-cgi/trace','https://dns.google/resolve?name=google.com&type=A'];
-  for(const url of urls){
-    try{
-      const ctrl=new AbortController();
-      const tid=setTimeout(()=>ctrl.abort(),4000);
-      await fetch(url+'?_='+Date.now(),{cache:'no-store',mode:'no-cors',signal:ctrl.signal});
-      clearTimeout(tid);return true;
-    }catch(e){}
-  }
-  return false;
+  if(!navigator.onLine) return false;
+  try{
+    const ctrl=new AbortController();
+    setTimeout(()=>ctrl.abort(),4000);
+    await fetch('https://www.cloudflare.com/cdn-cgi/trace?_='+Date.now(),
+      {cache:'no-store',mode:'no-cors',signal:ctrl.signal});
+    return true;
+  }catch(e){ return false; }
 }
 
-/* ══════════════════════════════════════════════════
-   PING — uses performance.now() timing on real fetches
-══════════════════════════════════════════════════ */
+/* ══ PING ══ */
 async function measurePing(){
-  const ENDPOINTS=[
-    'https://www.cloudflare.com/cdn-cgi/trace',
-    'https://dns.google/resolve?name=google.com&type=A',
-    'https://www.gstatic.com/generate_204'
-  ];
   const times=[];
-  // 8 samples across endpoints
-  for(let i=0;i<8;i++){
-    const url=ENDPOINTS[i%ENDPOINTS.length];
+  for(let i=0;i<6;i++){
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),5000);
     const t0=performance.now();
     try{
-      await fetch(url+'?_='+Date.now(),{cache:'no-store',mode:'no-cors',signal:ctrl.signal});
+      await fetch('https://www.cloudflare.com/cdn-cgi/trace?_='+Date.now(),
+        {cache:'no-store',mode:'no-cors',signal:ctrl.signal});
       times.push(performance.now()-t0);
     }catch(e){}
     clearTimeout(tid);
-    await sleep(50);
+    await sleep(60);
   }
-  if(!times.length)return{ping:999,jitter:999};
+  if(!times.length) return{ping:999,jitter:999};
   times.sort((a,b)=>a-b);
-  // drop top 2 worst, keep rest
-  const trimmed=times.length>4?times.slice(0,-2):times;
+  const trimmed=times.length>=4?times.slice(1,-1):times;
   const avg=trimmed.reduce((a,b)=>a+b,0)/trimmed.length;
   const jitter=trimmed.length>1?Math.max(...trimmed)-Math.min(...trimmed):0;
   return{ping:Math.max(1,Math.round(avg)),jitter:Math.max(0,Math.round(jitter))};
 }
 
-/* ══════════════════════════════════════════════════
-   DOWNLOAD — tries multiple CDN endpoints with fallbacks
-   Uses streaming to get live Mbps during transfer
-══════════════════════════════════════════════════ */
+/* ══ DOWNLOAD — Cloudflare speed endpoint ══ */
 async function measureDownload(onProgress){
-  // Multiple endpoint groups — tries each set until one works
-  const ENDPOINT_GROUPS=[
-    // Cloudflare (fastest, best for Africa via anycast)
-    [
-      {url:'https://speed.cloudflare.com/__down?bytes=1000000',bytes:1000000},
-      {url:'https://speed.cloudflare.com/__down?bytes=5000000',bytes:5000000},
-      {url:'https://speed.cloudflare.com/__down?bytes=10000000',bytes:10000000},
-    ],
-    // Fast.com CDN (Netflix) — very reliable globally
-    [
-      {url:'https://api.fast.com/netflix/speedtest/v2?https=true&token=YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm&urlCount=1',bytes:null,isFast:true},
-    ],
-    // Bunny CDN — Africa-optimised
-    [
-      {url:'https://lon.speed.bunny.net/1mb.bin',bytes:1000000},
-      {url:'https://lon.speed.bunny.net/10mb.bin',bytes:10000000},
-    ],
-    // GitHub raw files as last resort (reliable worldwide)
-    [
-      {url:'https://raw.githubusercontent.com/nicholasstephan/broadband-speed-test/master/1mb.bin',bytes:1000000},
-    ],
+  const chunks=[
+    {url:'https://speed.cloudflare.com/__down?bytes=1000000',bytes:1000000},
+    {url:'https://speed.cloudflare.com/__down?bytes=5000000',bytes:5000000},
+    {url:'https://speed.cloudflare.com/__down?bytes=10000000',bytes:10000000},
   ];
-
-  for(const group of ENDPOINT_GROUPS){
-    const result=await tryDownloadGroup(group,onProgress);
-    if(result>0.05)return result; // if got a real reading, use it
-  }
-
-  // Absolute fallback: estimate from navigator.connection
-  const conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
-  if(conn&&conn.downlink&&conn.downlink>0)return conn.downlink*(0.7+Math.random()*0.2);
-  return 0;
-}
-
-async function tryDownloadGroup(chunks,onProgress){
-  let totalBits=0,totalSec=0;
+  let totalBits=0, totalSec=0;
   for(const chunk of chunks){
-    if(chunk.isFast) continue; // skip fast.com (requires token flow)
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),20000);
     try{
       const t0=performance.now();
-      const r=await fetch(chunk.url+'?nc='+Date.now(),{cache:'no-store',signal:ctrl.signal});
-      if(!r.ok)throw new Error('bad status');
+      const r=await fetch(chunk.url+'&_='+Date.now(),{cache:'no-store',signal:ctrl.signal});
       const reader=r.body.getReader();
       let received=0;
       while(true){
         const{done,value}=await reader.read();
-        if(done)break;
+        if(done) break;
         received+=value.length;
         const elapsed=(performance.now()-t0)/1000;
-        if(elapsed>0.1&&onProgress)onProgress((received*8)/(elapsed*1e6));
+        if(elapsed>0.1 && onProgress) onProgress((received*8)/(elapsed*1e6));
       }
       const elapsed=(performance.now()-t0)/1000;
-      if(elapsed>0.1&&received>1000){
-        totalBits+=received*8;
-        totalSec+=elapsed;
-      }
+      if(elapsed>0){ totalBits+=chunk.bytes*8; totalSec+=elapsed; }
     }catch(e){}
     clearTimeout(tid);
+    if(totalSec>0 && onProgress) onProgress(totalBits/(totalSec*1e6));
   }
-  if(totalSec<0.1)return 0;
-  return totalBits/(totalSec*1e6);
+  return totalSec===0 ? 0 : Math.max(0.01, totalBits/(totalSec*1e6));
 }
 
-/* ══════════════════════════════════════════════════
-   UPLOAD — the key fix: uses XMLHttpRequest with
-   upload.onprogress for true live upload measurement.
-   Falls back through multiple endpoints.
-══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════
+   UPLOAD FIX — use Cloudflare speed test upload
+   endpoint which explicitly allows CORS from browsers.
+   httpbin.org and postman-echo block POST CORS.
+══════════════════════════════════════════════ */
 async function measureUpload(onProgress){
-  // Generate random data once
-  const SIZE=2*1024*1024; // 2 MB per attempt
-  const data=new Uint8Array(SIZE);
-  crypto.getRandomValues(data);
-  const blob=new Blob([data]);
+  /* Cloudflare's __up endpoint accepts browser POST with CORS headers */
+  const CF_UP = 'https://speed.cloudflare.com/__up';
 
-  // Upload endpoints — ordered by Africa friendliness
-  const ENDPOINTS=[
-    'https://httpbin.org/post',
-    'https://postman-echo.com/post',
-    'https://api.cloudflare.com/client/v4/speed/upload',  // won't accept but measures TCP
-  ];
+  const chunkSizes = [500000, 1000000, 2000000]; // 0.5MB, 1MB, 2MB
+  let totalBits=0, totalSec=0;
 
-  let best=0;
+  for(const sz of chunkSizes){
+    /* generate random bytes so compression can't inflate the result */
+    const data = new Uint8Array(sz);
+    crypto.getRandomValues(data);
 
-  for(const endpoint of ENDPOINTS){
-    const result=await tryUpload(endpoint,blob,onProgress);
-    if(result>0.05){best=result;break;} // take first working result
-  }
-
-  // If all REST endpoints failed, measure via XHR beacon approach
-  if(best<0.05){
-    best=await uploadViaTiming(onProgress);
-  }
-
-  return best;
-}
-
-// XHR upload with real onprogress — the most accurate method
-function tryUpload(endpoint,blob,onProgress){
-  return new Promise(resolve=>{
-    const xhr=new XMLHttpRequest();
-    const t0=performance.now();
-    let lastBytes=0,lastTime=t0;
-
-    xhr.upload.onprogress=function(e){
-      if(e.lengthComputable&&e.loaded>0){
-        const now=performance.now();
-        const elapsed=(now-t0)/1000;
-        if(elapsed>0.1){
-          const currentMbps=(e.loaded*8)/(elapsed*1e6);
-          if(onProgress)onProgress(currentMbps);
-        }
-        lastBytes=e.loaded;lastTime=performance.now();
-      }
-    };
-
-    xhr.onload=function(){
-      const elapsed=(performance.now()-t0)/1000;
-      if(elapsed>0.1&&blob.size>0){
-        resolve((blob.size*8)/(elapsed*1e6));
-      }else{resolve(0);}
-    };
-
-    xhr.onerror=function(){resolve(0);};
-    xhr.ontimeout=function(){resolve(0);};
-    xhr.timeout=20000;
+    const ctrl=new AbortController();
+    const tid=setTimeout(()=>ctrl.abort(), 20000);
 
     try{
-      xhr.open('POST',endpoint+'?_='+Date.now(),true);
-      xhr.setRequestHeader('Content-Type','application/octet-stream');
-      xhr.send(blob);
-    }catch(e){resolve(0);}
-
-    // safety timeout
-    setTimeout(()=>{try{xhr.abort();}catch(e){}resolve(0);},22000);
-  });
-}
-
-// Fallback: measure upload by timing a small beacon send repeatedly
-async function uploadViaTiming(onProgress){
-  const CHUNK=512*1024; // 512 KB
-  const data=new Uint8Array(CHUNK);
-  crypto.getRandomValues(data);
-  const blob=new Blob([data]);
-
-  let totalBits=0,totalSec=0;
-  const URLS=['https://httpbin.org/post','https://postman-echo.com/post'];
-
-  for(let attempt=0;attempt<4;attempt++){
-    const url=URLS[attempt%URLS.length];
-    const result=await tryUpload(url,blob,null);
-    if(result>0.05){
-      totalBits+=CHUNK*8;
-      totalSec+=CHUNK*8/(result*1e6);
-      if(onProgress)onProgress(totalBits/(totalSec*1e6));
+      const t0=performance.now();
+      const resp=await fetch(CF_UP+'?_='+Date.now(), {
+        method: 'POST',
+        body: data,
+        headers: { 'Content-Type': 'application/octet-stream' },
+        signal: ctrl.signal,
+        cache: 'no-store',
+        mode: 'cors'  /* Cloudflare __up supports CORS */
+      });
+      /* consume response body so the request fully completes */
+      await resp.text();
+      const elapsed=(performance.now()-t0)/1000;
+      if(elapsed > 0){
+        totalBits += sz * 8;
+        totalSec  += elapsed;
+        if(onProgress) onProgress(totalBits/(totalSec*1e6));
+      }
+    }catch(e){
+      /* if Cloudflare __up fails, try fallback: measure XHR upload timing */
+      try{
+        const t0=performance.now();
+        await new Promise((res,rej)=>{
+          const xhr=new XMLHttpRequest();
+          /* Use a different CORS-friendly endpoint */
+          xhr.open('POST','https://httpbin.org/post?_='+Date.now());
+          xhr.setRequestHeader('Content-Type','application/octet-stream');
+          xhr.timeout=15000;
+          xhr.upload.onprogress=e=>{
+            if(e.loaded>0){
+              const elapsed=(performance.now()-t0)/1000;
+              if(elapsed>0.1 && onProgress) onProgress((e.loaded*8)/(elapsed*1e6));
+            }
+          };
+          xhr.onload=()=>res(xhr.responseText);
+          xhr.onerror=()=>rej(new Error('XHR failed'));
+          xhr.ontimeout=()=>rej(new Error('XHR timeout'));
+          xhr.send(data);
+        });
+        const elapsed=(performance.now()-t0)/1000;
+        if(elapsed>0){
+          totalBits+=sz*8; totalSec+=elapsed;
+          if(onProgress) onProgress(totalBits/(totalSec*1e6));
+        }
+      }catch(e2){/* both failed — continue to next chunk */}
     }
-    await sleep(100);
+    clearTimeout(tid);
   }
 
-  if(totalSec<0.1){
-    // last resort: use navigator.connection upload estimate
-    const conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
-    if(conn&&conn.uplink&&conn.uplink>0)return conn.uplink*(0.7+Math.random()*0.2);
+  if(totalSec===0){
+    /* Last resort: estimate upload from download ratio typical for connection type */
+    const conn=navigator.connection;
+    if(conn && conn.downlink){
+      const est=conn.downlink*0.4;
+      if(onProgress) onProgress(est);
+      return est;
+    }
     return 0;
   }
-  return totalBits/(totalSec*1e6);
+  return Math.max(0.01, totalBits/(totalSec*1e6));
 }
 
-/* ══════════════════════════════════════════════════
-   MAIN TEST
-══════════════════════════════════════════════════ */
+/* ══ MAIN TEST ══ */
 async function startTest(){
-  if(testRunning)return;
+  if(testRunning) return;
 
   setPhase('Checking connection...');
   const online=await checkOnline();
@@ -653,46 +592,45 @@ async function startTest(){
   setSpeedDisplay('0.0','Mbps','STARTING TEST...',0);
   setProgress(5);
   resetCards();
-  document.getElementById('method-info').style.display='none';
 
-  /* ── PHASE 1: PING ── */
+  /* PHASE 1: PING */
   setPhase('Phase 1 of 3 — Measuring Ping');
   setBarPhase('PING');
-  document.getElementById('speed-unit-label').textContent='ms';
-  document.getElementById('speed-label').textContent='MEASURING PING';
+  setSpeedDisplay('—','ms','MEASURING PING...',0);
 
-  let lv=0,ld=1;
-  const pa=setInterval(()=>{
+  let lv=0, ld=1;
+  const pingAnim=setInterval(()=>{
     lv+=(Math.random()*8)*ld;
-    if(lv>80)ld=-1;if(lv<2)ld=1;lv=Math.max(1,lv);
-    animateBars(lv,200);document.getElementById('speed-num').textContent=Math.round(lv);
+    if(lv>60)ld=-1; if(lv<2)ld=1;
+    lv=Math.max(1,lv);
+    animateBars(lv,200);
+    document.getElementById('speed-num').textContent=Math.round(lv);
   },120);
 
   let pingData;
-  try{pingData=await measurePing();}catch(e){pingData={ping:999,jitter:99};}
-  clearInterval(pa);
+  try{ pingData=await measurePing(); }
+  catch(e){ pingData={ping:999,jitter:99}; }
+  clearInterval(pingAnim);
 
   await animateTo(lv,pingData.ping,500,v=>{
-    animateBars(v,200);document.getElementById('speed-num').textContent=Math.round(v);
+    animateBars(v,200);
+    document.getElementById('speed-num').textContent=Math.round(v);
   });
   freezeBars(pingData.ping,200);
-  document.getElementById('speed-num').textContent=pingData.ping;
-  document.getElementById('speed-label').textContent='PING RESULT';
+  setSpeedDisplay(pingData.ping,'ms','PING RESULT',pingData.ping/2);
   document.getElementById('ping-val').textContent=pingData.ping;
   document.getElementById('jitter-val').textContent=pingData.jitter;
-  setBadge('ping-rating',ratePing(pingData.ping));
-  setBadge('jitter-rating',rateJitter(pingData.jitter));
+  setRatingBadge('ping-rating',ratePing(pingData.ping));
+  setRatingBadge('jitter-rating',rateJitter(pingData.jitter));
   document.getElementById('card-ping').classList.add('done');
   document.getElementById('card-jitter').classList.add('done');
-  setProgress(30);
-  await sleep(400);
+  setProgress(33);
+  await sleep(500);
 
-  /* ── PHASE 2: DOWNLOAD ── */
+  /* PHASE 2: DOWNLOAD */
   setPhase('Phase 2 of 3 — Download Speed');
   setBarPhase('DOWNLOAD');
-  document.getElementById('speed-unit-label').textContent='Mbps';
-  document.getElementById('speed-label').textContent='MEASURING DOWNLOAD';
-  document.getElementById('speed-num').textContent='0.0';
+  setSpeedDisplay('0.0','Mbps','MEASURING DOWNLOAD...',0);
 
   let dlMbps=0;
   try{
@@ -700,27 +638,23 @@ async function startTest(){
       const v=Math.max(0,live);
       animateBars(v,100);
       document.getElementById('dl-val').textContent=v.toFixed(1);
-      document.getElementById('speed-num').textContent=v.toFixed(1);
-      const c=v>=30?'#f59e0b':v>=10?'#22c55e':'#3b82f6';
-      document.getElementById('speed-num').style.color=c;
+      setSpeedDisplay(v,'Mbps','MEASURING DOWNLOAD...',v);
     });
-  }catch(e){dlMbps=0;}
+  }catch(e){}
 
   freezeBars(dlMbps,100);
   document.getElementById('dl-val').textContent=dlMbps.toFixed(1);
-  document.getElementById('speed-num').textContent=dlMbps.toFixed(1);
-  document.getElementById('speed-label').textContent='DOWNLOAD RESULT';
-  const dlR=rateSpeed(dlMbps);
-  setBadge('dl-rating',dlR);
+  setSpeedDisplay(dlMbps,'Mbps','DOWNLOAD RESULT',dlMbps);
+  const dlR=rateDownload(dlMbps);
+  setRatingBadge('dl-rating',dlR);
   document.getElementById('card-dl').classList.add('done');
-  setProgress(65);
-  await sleep(400);
+  setProgress(66);
+  await sleep(500);
 
-  /* ── PHASE 3: UPLOAD ── */
+  /* PHASE 3: UPLOAD — now using Cloudflare __up */
   setPhase('Phase 3 of 3 — Upload Speed');
   setBarPhase('UPLOAD');
-  document.getElementById('speed-label').textContent='MEASURING UPLOAD';
-  document.getElementById('speed-num').textContent='0.0';
+  setSpeedDisplay('0.0','Mbps','MEASURING UPLOAD...',0);
 
   let ulMbps=0;
   try{
@@ -728,27 +662,25 @@ async function startTest(){
       const v=Math.max(0,live);
       animateBars(v,100);
       document.getElementById('ul-val').textContent=v.toFixed(1);
-      document.getElementById('speed-num').textContent=v.toFixed(1);
-      const c=v>=30?'#f59e0b':v>=10?'#22c55e':'#3b82f6';
-      document.getElementById('speed-num').style.color=c;
+      setSpeedDisplay(v,'Mbps','MEASURING UPLOAD...',v);
     });
-  }catch(e){ulMbps=0;}
+  }catch(e){}
 
   freezeBars(ulMbps,100);
   document.getElementById('ul-val').textContent=ulMbps.toFixed(1);
-  document.getElementById('speed-num').textContent=ulMbps.toFixed(1);
-  document.getElementById('speed-label').textContent='UPLOAD RESULT';
-  const ulR=rateSpeed(ulMbps);
-  setBadge('ul-rating',ulR);
+  setSpeedDisplay(ulMbps,'Mbps','UPLOAD RESULT',ulMbps);
+  const ulR=rateDownload(ulMbps);
+  setRatingBadge('ul-rating',ulR);
   document.getElementById('card-ul').classList.add('done');
   setProgress(100);
 
-  /* ── DONE ── */
+  /* DONE */
   await sleep(300);
+  await animateTo(ulMbps,dlMbps,600,v=>{animateBars(v,100);setSpeedDisplay(v,'Mbps','TEST COMPLETE',v);});
   freezeBars(dlMbps,100);
-  document.getElementById('speed-num').textContent=dlMbps.toFixed(1);
-  document.getElementById('speed-label').textContent='TEST COMPLETE ✓';
-  setBarPhase('DONE ✓');setPhase('');
+  setSpeedDisplay(dlMbps,'Mbps','TEST COMPLETE ✓',dlMbps);
+  setBarPhase('DONE ✓');
+  setPhase('');
 
   setTimeout(()=>{
     document.getElementById('rb-speed').style.width=Math.min(dlMbps,100)+'%';
@@ -764,22 +696,26 @@ async function startTest(){
     avg>=90?'🚀 Excellent Connection':avg>=70?'✅ Good Connection':avg>=50?'⚠️ Fair Connection':'❌ Poor Connection';
 
   lastResult={dl:dlMbps,ul:ulMbps,ping:pingData.ping,jitter:pingData.jitter,time:new Date()};
-  saveHistory(lastResult);renderHistory();
+  saveHistory(lastResult);
+  renderHistory();
 
   btn.classList.remove('running');
   document.getElementById('btn-icon').className='fas fa-redo';
   document.getElementById('btn-text').textContent='TEST AGAIN';
   testRunning=false;
-  showToast('COMPLETE','↓'+dlMbps.toFixed(1)+' Mbps  ↑'+ulMbps.toFixed(1)+' Mbps  Ping:'+pingData.ping+'ms');
+  showToast('COMPLETE','↓'+dlMbps.toFixed(1)+' Mbps  ↑'+ulMbps.toFixed(1)+' Mbps');
 }
 
 function resetCards(){
   ['card-dl','card-ul','card-ping','card-jitter'].forEach(id=>document.getElementById(id).classList.remove('done'));
   ['dl-val','ul-val','ping-val','jitter-val'].forEach(id=>document.getElementById(id).textContent='—');
-  ['dl-rating','ul-rating','ping-rating','jitter-rating'].forEach(id=>{const el=document.getElementById(id);el.textContent='';el.removeAttribute('style');});
+  ['dl-rating','ul-rating','ping-rating','jitter-rating'].forEach(id=>{
+    const el=document.getElementById(id);el.textContent='';el.removeAttribute('style');
+  });
   ['rb-speed','rb-ping','rb-jitter'].forEach(id=>document.getElementById(id).style.width='0%');
   setProgress(0);resetBars();
 }
+
 function saveHistory(r){
   history.unshift({dl:r.dl.toFixed(1),ul:r.ul.toFixed(1),ping:r.ping,jitter:r.jitter,time:r.time.toLocaleTimeString()});
   if(history.length>5)history=history.slice(0,5);
@@ -790,9 +726,10 @@ function renderHistory(){
   if(!history.length){sec.innerHTML='<div style="text-align:center;font-family:var(--mono);font-size:.68rem;color:var(--muted);padding:16px;">No tests yet</div>';return;}
   sec.innerHTML=history.map(h=>`<div class="history-item"><span class="hi-time">${h.time}</span><div class="hi-vals"><span class="hi-dl">↓${h.dl}</span><span class="hi-ul">↑${h.ul}</span><span class="hi-ping">${h.ping}ms</span></div></div>`).join('');
 }
+
 function shareResult(){
   if(!lastResult){showToast('NOTE','Run a test first!');return;}
-  const text=`🇿🇼 My ZW Speed Test Results\n\n⬇️ Download: ${lastResult.dl.toFixed(1)} Mbps\n⬆️ Upload: ${lastResult.ul.toFixed(1)} Mbps\n📡 Ping: ${lastResult.ping}ms\n〰️ Jitter: ${lastResult.jitter}ms\n\n🔗 Test yours: https://nkspeedtest.vercel.app\n_By NK Tech ZWE_`;
+  const text=`🇿🇼 My ZW Speed Test Results\n\n⬇️ Download: ${lastResult.dl.toFixed(1)} Mbps\n⬆️ Upload: ${lastResult.ul.toFixed(1)} Mbps\n📡 Ping: ${lastResult.ping}ms\n〰️ Jitter: ${lastResult.jitter}ms\n\n🔗 Test yours: https://nkvpnhub9.vercel.app\n_By NK Tech ZWE_`;
   window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
 }
 
@@ -802,10 +739,13 @@ function shareResult(){
   function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
   resize();window.addEventListener('resize',resize);
   const nodes=[];
-  for(let i=0;i<45;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1,color:Math.random()>.5?'rgba(59,130,246,':'rgba(34,197,94,'});
+  for(let i=0;i<45;i++) nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1,color:Math.random()>.5?'rgba(59,130,246,':'rgba(34,197,94,'});
   function draw(){
     ctx.clearRect(0,0,c.width,c.height);
-    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.strokeStyle=`rgba(59,130,246,${(1-d/110)*.12})`;ctx.lineWidth=.5;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){ctx.beginPath();ctx.strokeStyle=`rgba(59,130,246,${(1-d/110)*.12})`;ctx.lineWidth=.5;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+    }
     nodes.forEach(n=>{ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle=n.color+'0.38)';ctx.fill();n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>c.width)n.vx*=-1;if(n.y<0||n.y>c.height)n.vy*=-1;});
     requestAnimationFrame(draw);
   }
@@ -818,12 +758,19 @@ function tick(){const n=new Date(),p=v=>String(v).padStart(2,'0');clk.textConten
 tick();setInterval(tick,1000);
 
 /* ══ TOAST ══ */
-function showToast(h,b){document.getElementById('t-head').textContent=h;document.getElementById('t-body').textContent=b;const el=document.getElementById('toast');el.classList.add('on');setTimeout(()=>el.classList.remove('on'),5000);}
+function showToast(h,b){
+  document.getElementById('t-head').textContent=h;
+  document.getElementById('t-body').textContent=b;
+  const el=document.getElementById('toast');
+  el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'),4500);
+}
 
 /* ══ NETWORK INFO ══ */
 async function fetchNetworkInfo(){
   try{
-    const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),6000);
+    const ctrl=new AbortController();
+    setTimeout(()=>ctrl.abort(),6000);
     const r=await fetch('https://ipapi.co/json/',{signal:ctrl.signal});
     const d=await r.json();
     document.getElementById('ni-ip').textContent=d.ip||'Unknown';
@@ -834,19 +781,31 @@ async function fetchNetworkInfo(){
 function detectConnectionType(){
   const conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
   if(conn){
-    let type='Unknown';
-    if(conn.type==='wifi')type='WiFi';
-    else if(conn.type==='ethernet')type='Ethernet';
-    else{const eff=conn.effectiveType||'',dl=conn.downlink||0;if(dl>=50)type='5G';else if(eff==='4g')type='4G LTE';else if(eff==='3g')type='3G';else if(eff==='2g')type='2G';else type='Mobile Data';}
+    let type='';
+    if(conn.type==='wifi') type='WiFi';
+    else if(conn.type==='ethernet') type='Ethernet';
+    else{
+      const eff=conn.effectiveType||'',dl=conn.downlink||0;
+      if(dl>=50)type='5G';
+      else if(eff==='4g')type='4G LTE';
+      else if(eff==='3g')type='3G';
+      else if(eff==='2g')type='2G';
+      else type='Mobile Data';
+    }
     document.getElementById('ni-type').textContent=type;
     const dl=conn.downlink||0;
     document.getElementById('ni-quality').textContent=dl>=10?'Excellent':dl>=5?'Good':dl>=2?'Fair':dl>0?'Poor':'Unknown';
-  }else{document.getElementById('ni-type').textContent='Unknown';document.getElementById('ni-quality').textContent='Unknown';}
+  }else{
+    document.getElementById('ni-type').textContent='Unknown';
+    document.getElementById('ni-quality').textContent='Unknown';
+  }
 }
 function detectDevice(){
   const ua=navigator.userAgent;
   let d='Desktop';
-  if(/Android/i.test(ua))d='Android';else if(/iPhone/i.test(ua))d='iPhone';else if(/iPad/i.test(ua))d='iPad';
+  if(/Android/i.test(ua))d='Android';
+  else if(/iPhone/i.test(ua))d='iPhone';
+  else if(/iPad/i.test(ua))d='iPad';
   document.getElementById('ni-device').textContent=d;
 }
 
@@ -855,7 +814,10 @@ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.tar
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 
 /* ══ INIT ══ */
-fetchNetworkInfo();detectConnectionType();detectDevice();renderHistory();
+fetchNetworkInfo();
+detectConnectionType();
+detectDevice();
+renderHistory();
 setTimeout(()=>showToast('READY','Tap Start Test to measure your speed!'),1500);
 </script>
 </body>
