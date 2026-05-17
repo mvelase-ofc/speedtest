@@ -692,7 +692,7 @@ function renderHistory(){
 
 function shareResult(){
   if(!lastResult){showToast('NOTE','Run a test first!');return;}
-  const text=`🇿🇼 My ZW Speed Test Results\n\n⬇️ Download: ${lastResult.dl.toFixed(1)} Mbps\n⬆️ Upload: ${lastResult.ul.toFixed(1)} Mbps\n📡 Ping: ${lastResult.ping}ms\n〰️ Jitter: ${lastResult.jitter}ms\n\n🔗 Test yours: https://nkvpnhub9.vercel.app\n_By NK Tech ZWE_`;
+  const text=`🇿🇼 *𝖬𝗒 𝖲𝗉𝖾𝖾𝖽 𝖳𝖾𝗌𝗍*\n\n⬇️ *𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽*: ${lastResult.dl.toFixed(1)} *𝖬𝖻𝗉𝗌*\n⬆️ *𝖴𝗉𝗅𝗈𝖺𝖽*: ${lastResult.ul.toFixed(1)} *Mbps*\n📡 *𝖯𝗂𝗇𝗀*: ${lastResult.ping}ms\n〰️ *𝖩𝗂𝗍𝗍𝖾𝗋*: ${lastResult.jitter}ms\n\n🔗 *𝖳𝖾𝗌𝗍 𝗒𝗈𝗎𝗋𝗌*: https://nkvpnhub9.vercel.app\n*𝖭𝗄 𝖳𝖾𝖼𝗁*`;
   window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
 }
 
